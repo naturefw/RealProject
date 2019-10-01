@@ -28,13 +28,13 @@
         }
         .div2{
             clear: both;
-            width:  97%;
+            width:  99%;
             height: 300px;
             border: 1px solid rgb(167, 142, 142);
         }
         .div3{
             float: left; 
-            width:  32%;
+            width:  35%;
             height: 300px;
             border: 1px solid rgb(167, 142, 142);
         }
@@ -48,6 +48,7 @@
     <div id="doc" class="div1">
         <div class="div2">
             <!--数据库文档的Excel表格-->
+            <h5>excel格式的数据库文档</h5>
             <table rules="all" class="table_default1">
                 <tr>
                     <th>字段名称</th>
@@ -62,7 +63,7 @@
                 </tr>
                 <tr v-for="tr in dataExcel.info">
                     <td v-for="td in dataExcel.orderby">
-                        <my-input :meta="dataExcel.ctlMeta[td]" v-model="tr[td]" :value="tr[td]" @input></my-input>
+                        <my-input :meta="dataExcel.ctlMeta[td]" v-model="tr[td]" :value="tr[td]" ></my-input>
                     </td>
                 </tr>
             </table>
@@ -71,7 +72,7 @@
         <div class="div2">
             <div class="div3">
                 <!--数据库文档的json形式-->
-                <h5>数据库文档的json格式</h5>
+                <h5>json格式数据库文档</h5>
                 <textarea readonly v-model="docJsonFormat" rows="14" cols="50"> </textarea>
                 
             </div>
@@ -105,7 +106,9 @@
                             <tbody>
                                 <tr v-for="item in formControl.ctlMeta">
                                     <td>{{item.colName}}：</td>
-                                    <td><my-input v-model="formControl.value[item.name]" :meta="item"></my-input></td>
+                                    <td><my-input v-model="formControl.value[item.name]" :meta="item"></my-input>
+                                    <input type="button" value="精装修" class="input_01" @click="modCtl(item)">
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -115,56 +118,60 @@
         <div class="div2">
             <!--后端模拟-->
             <h5>通过引擎，生成参数化sql</h5>
-
+            <textarea readonly v-model="valueJsonToParamSQL" rows="4" cols="80"> </textarea><br>
+            <textarea readonly v-model="valueJsonToSQL" rows="4" cols="80"> </textarea>
+           
         </div>
             
     </div>
 
-<div id="help" class="div1" style="clear: both;">
-    <div >
-        <div id="divText" style="width: 470px;height: 700px; padding: 10px; border: 1px solid #333;display: block;">
-            <span id="FrmCommonForm">
-                <table rules="all" class="tablem tableClass02">
-                    <tbody>
-                        <tr v-for="item in ctlMeta[formValue.controlType].showIds " 
-                            :id="'tr'+formControl[item].controlId" 
-                            :key="'tr'+formControl[item].controlId" 
-                            style="display: table-row;">
-                                <td align="right">{{formControl[item].colName}}：</td>
-                                <td align="left">
-                                    <my-input v-if="item != 'list'" v-model="formValue[formControl[item].controlId]" :meta="formControl[item]" ></my-input>
-                                    <span v-else-if="item == 'list'">
-                                        <!--设置备选项-->
-                                        备选项数量：<my-input @change="setListItem"  v-model="listItem.number" value="1" :meta="formControl.listNumber"> </my-input>
-                                                    
-                                        <div v-for="item in listItem.item">
-                                            <my-input v-model="item.id"  :meta="formControl.listId"></my-input>
-                                            <my-input v-model="item.name"  :meta="formControl.listName"> </my-input>
-                                        </div>
-                                    </span>
-                                    {{item}}
-                                </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </span>
-          
-       </div>
+    <div id="help" v-show="helpIsShow" class="layer_div_c" @mousedown="move" style="top: 297px; left: 187px; width:540px; height: 850px; z-index: 10007; display: block;">
+        <span id="span_title_1001" class="layer_title" style="cursor: move;">精装修<a @click="helpIsShow=false" style="cursor:pointer">X</a></span>
+        <p>
+            <div id="divText" style="width: 470px;height: 660px; padding: 10px; border: 1px solid #333;display: block;">
+                <span id="FrmCommonForm">
+                    <table rules="all" class="tablem tableClass02">
+                        <tbody>
+                            <tr v-for="item in ctlMeta[formValue.controlType].showIds " 
+                                :id="'tr'+formControl[item].controlId" 
+                                :key="'tr'+formControl[item].controlId" 
+                                style="display: table-row;">
+                                    <td align="right">{{formControl[item].colName}}：</td>
+                                    <td align="left">
+                                        <my-input v-if="item != 'list'" v-model="formValue[formControl[item].controlId]" :meta="formControl[item]" ></my-input>
+                                        
+                                        <span v-else-if="item == 'list'">
+                                            <!--设置备选项-->
+                                            备选项数量：<my-input @change="setListItem"  v-model="listItem.number" value="1" :meta="formControl.listNumber"> </my-input>
+                                                        
+                                            <div v-for="item in listItem.item">
+                                                <my-input v-model="item.id"  :meta="formControl.listId"></my-input>
+                                                <my-input v-model="item.name"  :meta="formControl.listName"> </my-input>
+                                            </div>
+                                        </span>
+                                        {{item}}
+                                    </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </span>
+                <div>
+                    <textarea readonly v-model="ctlJsonFormat" rows="4" cols="80"> </textarea>
+                    <input type="button" class="input_01" value="设置" @click="copyJson()">
+                </div>
+            </div>
+           
+            
+        </p>
+       
     </div>
 
-    <!--
-    <div style="float: left;text-align:left;width: 330px;height: 500px;padding: 5px;border: 1px solid #333;">
-        代码：<br>
-        {{formValue.controlType}}<br> 
-        <textarea id="txtMeta" v-model="createJsonCode" name="S1" cols="40" rows="30"></textarea>
-    </div>
-    -->
-</div>
 
     <script type="text/javascript">
         var doc = new Vue({
             el:"#doc",
             data:{
+                isSet:false, //避免嵌套循环渲染。 
                 dataExcel:{
                     orderby:["enName","cnName","type","size","defultValue","isNull","command","ctlType"],
                     info:[
@@ -225,6 +232,39 @@
                 valueJsonFormat:function(){
                     return format(JSON.stringify(this.formControl.value));
                 },
+                valueJsonToParamSQL(){
+                    //提交的数据变成sql
+                    var re = "";
+                    var docJson = this.dataExcel.info;
+                    var cols = [];
+                    var values = [];
+                    for (var key in docJson){
+                        var doc = docJson[key];
+                        cols.push(doc.enName);
+                        values.push("?");
+                    }
+                    //如果是自增主键，设置为 0 
+                    values[0] = "0";
+
+                    re = "INSERT INTO tableName (" + cols.join(',') + ") VALUES (" + values.join(",") + ")";
+                    return re;
+                },
+                valueJsonToSQL(){
+                    //提交的数据变成sql
+                    var re = "";
+                    var docJson = this.dataExcel.info;
+                    var cols = [];
+                    var values = [];
+                    var valueJson = this.formControl.value;
+                    for (var key in docJson){
+                        var doc = docJson[key];
+                        cols.push(doc.enName);
+                        values.push('"' + valueJson[doc.enName] + '"' );
+                    }
+
+                    re = "insert into table (" + cols.join(',') + ") values (" + values.join(",") + ")";
+                    return re;
+                },
                 ctlJsonFormat:function(){
                     //表单控件的json
                     var formJson = {};
@@ -234,39 +274,54 @@
                     var docJson = this.dataExcel.info;
                 
                     //变量socJson
-                    for(var key in docJson){
-                        //文档里一个字段的描述
-                        var doc = docJson[key];
+                    if (!this.isSet){
+                        for(var key in docJson){
+                            //文档里一个字段的描述
+                            var doc = docJson[key];
 
-                        //获取现有的表单元素的json
-                        var ctl ={};// formControl.ctlMeta[doc.enName];
-                        if (typeof(ctl) === "undefined") {
-                            ctl = {};
+                            //获取现有的表单元素的json
+                            var ctl = this.formControl.ctlMeta[doc.enName];
+                            if (typeof(ctl) === "undefined") {
+                                ctl = {};
+                                ctl.controlType = doc.ctlType;
+                                ctl.class = "cssTxt input_t1";
+                                ctl.placeholder = doc.cnName;
+                                ctl.size = doc.size;
+                                ctl.maxlength = doc.size;
+                                ctl.value = doc.defultValue;
+                            }
+
+                            //修改文档可以影响的表单元素的json
+                            ctl.colName = doc.cnName;
+                            ctl.title = doc.cnName;
+                            ctl.name = doc.enName;
+                            
+                            formJson[doc.enName] = ctl;  //表单组件
+                            formValue[doc.enName] = ctl.value; //表单值
+
                         }
-
-                        //修改表单元素的json
-                        ctl.controlType = doc.ctlType;
-                        ctl.colName = doc.cnName;
-                        ctl.class = "cssTxt input_t1";
-                        ctl.title = doc.cnName;
-                        ctl.name = doc.enName;
-                        ctl.placeholder = doc.cnName;
-                        ctl.size = doc.size;
-                        ctl.maxlength = doc.size;
-                        ctl.value = doc.defultValue;
-                        
-                        formJson[doc.enName] = ctl;
-                        formValue[doc.enName] = ctl.value;
-
+                        this.formControl.ctlMeta = formJson;
+                        this.formControl.value = formValue;
                     }
-                    this.formControl.ctlMeta = formJson;
-                    this.formControl.value = formValue;
+                    
 
                     return format(JSON.stringify(this.formControl.ctlMeta));
                 } 
             },
             methods:{
-               
+                modCtl:function(meta){
+                    //alert(meta.name);
+                    //form.formValue = meta;
+                    form.helpIsShow = true;
+                    //遍历赋值
+                    //先改name
+                    form.formValue.name = meta.name;
+                    for(var key in form.formValue){
+                        //var item = form.formValue[key];
+                        if (typeof(meta[key]) !=="undefined")
+                            form.formValue[key] = meta[key];
+                    }
+                }
             }
 
         });
@@ -293,7 +348,11 @@
                 listItem:{
                     number:1,
                     item:[{id:1,name:''}]
-                }
+                },
+                helpIsShow:true,
+                positionX:0,
+                positionY:0,
+
             },
             created: function () {
                 this.formControl = formControl;  //控件描述
@@ -301,7 +360,34 @@
                 this.ctlMeta = controlMeta;  //控件字典
             },
             computed:{
-               
+                ctlJsonFormat:function(){
+                    // doc.formControl[this.formValue.name] = this.formValue;
+                    doc.isSet = true;
+                    //if (this.formValue.name != "")
+                    //    Vue.set(doc.formControl.ctlMeta,this.formValue.name,this.formValue);
+                    if (this.formValue.name != ""){
+                        for(var key in this.formValue){
+                            Vue.set(doc.formControl.ctlMeta[this.formValue.name],key,this.formValue[key]);
+                        }
+                    }
+                    return format(JSON.stringify(this.formValue));
+                   
+                },
+                 //设置备选项
+                setListItem:function(returnValue,event, meta){
+                    var val = returnValue;
+                    //alert(returnValue);
+                    
+                    this.listItem.item = [];
+
+                    for(var i=0;i<parseInt(val);i++){
+                        this.listItem.item.push({
+                            id:i+1,
+                            name:''
+                        })
+                    }
+
+                },
                 //依据控件类型创建备选项的绑定值
                 creatList:function(value){
                     var re = "";
@@ -310,127 +396,10 @@
                     re = '[{"id":'+value+',"name":"ee'+ this.listItem.number +'","check":false}]';
 
                     return re;
-                },
-
-                //创建json对象，供预览用
-                createJson:function(){
-                    var re = "";
-                    var arr = [];
-
-                    for (var i in this.ctlMeta[this.formValue.controlType].showIds){
-                        var key = this.ctlMeta[this.formValue.controlType].showIds[i]
-                        var val = this.formValue[key];
-                        var tmp ='"' + key + '":';
-
-                        var isNum = !isNaN(val); //判断是不是数字
-
-                        if (val === 'true' || val === 'false')
-                            isNum = true; // 视为数字
-
-                        if (val === '' || val === null)
-                            isNum = false; //要加双引号
-                        
-                        if (val.length >0){
-                            if (val.substring(0,1) === '[')
-                                isNum = true;
-                            if (val.substring(0,1) === '{')
-                                isNum = true;
-
-                        }
-
-                        if (!isNum) tmp +='"';
-
-                        if (key === 'list'){
-                            var item =  this.listItem.item;
-                            var arrItem = [];
-                            for (var i=0;i<item.length;i++){
-                                arrItem.push('{"id":' + item[i].id + ',"name":"' + item[i].name+'"}');
-                            }
-                            tmp += '['+ arrItem.join(',') +']';
-                        }else{
-                            tmp += this.formValue[key];
-                        }
-                        
-                        if (!isNum) tmp +='"';
-
-                        arr.push(tmp);
-
-                    }
-
-                    re= arr.join(',');
-                    re = '{'+ re  + '}';
-                    
-                    var j = "";
-
-                    try{
-                        j=JSON.parse(re);
-                    }
-                    catch{
-                        alert('描述信息格式不正确，不能转换成json');
-                        j=formModel
-                    }
-
-                    this.json = j;
-
-                    return j;
-                },
-                //创建json字符串，供代码用
-                createJsonCode:function(){
-                    var re = "";
-                    var arr = [];
-
-                    for (var i in this.ctlMeta[this.formValue.controlType].showIds){
-                        var key = this.ctlMeta[this.formValue.controlType].showIds[i]
-                        var val = this.formValue[key];
-                        var tmp ='\r\n    ' + key + ':';
-
-                        var isNum = !isNaN(val); //判断是不是数字
-
-                        if (val === 'true' || val === 'false')
-                            isNum = true; // 视为数字
-
-                        if (val === '' || val === null)
-                            isNum = false; //要加双引号
-                        
-                        if (val.length >0){
-                            if (val.substring(0,1) === '[')
-                                isNum = true;
-                            if (val.substring(0,1) === '{')
-                                isNum = true;
-
-                        }
-
-                        if (!isNum) tmp +='"';
-                        if (key === 'list'){
-                            var item =  this.listItem.item;
-                            var arrItem = [];
-                            for (var i=0;i<item.length;i++){
-                                arrItem.push('{"id":' + item[i].id + ',"name":"' + item[i].name+'"}');
-                            }
-                            tmp += '['+ arrItem.join(',') +']';
-                        }else{
-                            tmp += this.formValue[key];
-                        }
-                       
-                        if (!isNum) tmp +='"';
-
-                        arr.push(tmp);
-
-                    }
-
-                    re= arr.join(',');
-                    re = 'c:{'+ re  + '\r\n};';
-                    
-                    return re;
-                }
+                } 
                  
             },
             methods: {
-                //菜单触发的选择
-                setJosn:function(key){
-                    this.formValue.controlType = key;
-                },
-                
                 //设置备选项
                 setListItem:function(returnValue,event, meta){
                     var val = returnValue;
@@ -445,7 +414,41 @@
                         })
                     }
 
-                }
+                },
+                copyJson:function(){
+                    //alert("aa");
+                    if (this.formValue.name != ""){
+                        for(var key in this.formValue){
+                            Vue.set(doc.formControl.ctlMeta[this.formValue.name],key,this.formValue[key]);
+                        }
+                    }
+                    //Vue.set(doc.formControl.ctlMeta,this.formValue.name,this.formValue);
+                   
+                },
+                move(e){
+                    let odiv = e.target.parentElement;        //获取目标元素
+                    
+                    //算出鼠标相对元素的位置
+                    let disX = e.clientX - odiv.offsetLeft;
+                    let disY = e.clientY - odiv.offsetTop;
+                    document.onmousemove = (e)=>{       //鼠标按下并移动的事件
+                        //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+                        let left = e.clientX - disX;    
+                        let top = e.clientY - disY;
+                        
+                        //绑定元素位置到positionX和positionY上面
+                        this.positionX = top;
+                        this.positionY = left;
+                        
+                        //移动当前元素
+                        odiv.style.left = left + 'px';
+                        odiv.style.top = top + 'px';
+                    };
+                    document.onmouseup = (e) => {
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                    };
+                }   
             }
         });
 
