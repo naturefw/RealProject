@@ -61,14 +61,14 @@ var docExcelControlMeta={
         max:8000,
         step:1
     },
-    defultValue:{
+    defaultValue:{
         controlId:105,
         controlType:116,
         colName:"默认值",
         tabIndex:1,
         class:"cssTxt input_t1",
         title:"字段的默认值",
-        name:"defultValue",
+        name:"defaultValue",
         value:"",
         placeholder:"请输入字段的默认值",
         size:10,
@@ -124,7 +124,7 @@ var dataDocInfo = [
         cnName:"姓名",
         type:"nvarchar",
         size:10,
-        defultValue:"章数",
+        defaultValue:"",
         isNull:false,
         command:"员工姓名",
         ctlType:116
@@ -134,7 +134,7 @@ var dataDocInfo = [
         cnName:"年龄",
         type:"int",
         size:4,
-        defultValue:"18",
+        defaultValue:"18",
         isNull:false,
         command:"年龄",
         ctlType:111
@@ -144,10 +144,19 @@ var dataDocInfo = [
         cnName:"出生日期",
         type:"datetime",
         size:10,
-        defultValue:"1980-01-01",
+        defaultValue:"1980-01-01",
         isNull:false,
         command:"出生日期",
         ctlType:103
-    }
+    },
+    { enName:"MobilePhone",cnName:"手机号",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"手机号",ctlType:112},
+    { enName:"WeChat",cnName:"微信",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"微信",ctlType:116},
+    { enName:"QQ",cnName:"QQ",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"QQ",ctlType:111},
+    { enName:"Nation",cnName:"民族",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"民族",ctlType:116},
+    { enName:"Education",cnName:"学历",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"学历",ctlType:116},
+    { enName:"Marriage",cnName:"婚否",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"婚否",ctlType:116},
+    { enName:"College",cnName:"毕业院校",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"毕业院校",ctlType:116},
+    { enName:"Specialized",cnName:"所学专业",type:"nvarchar",size:20,defaultValue:"",isNull:false,command:"所学专业",ctlType:116}
+
     
 ];

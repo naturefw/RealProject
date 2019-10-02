@@ -31,12 +31,15 @@
             width:  99%;
             height: 300px;
             border: 1px solid rgb(167, 142, 142);
+            margin: 4px;
+            
         }
         .div3{
             float: left; 
             width:  35%;
             height: 300px;
             border: 1px solid rgb(167, 142, 142);
+             
         }
          .dataJson{
             width: 200px;
@@ -46,7 +49,7 @@
 
 <body >
     <div id="doc" class="div1">
-        <div class="div2">
+        <div class="div2" style="overflow:scroll;">
             <!--数据库文档的Excel表格-->
             <h5>excel格式的数据库文档</h5>
             <table rules="all" class="table_default1">
@@ -63,7 +66,7 @@
                 </tr>
                 <tr v-for="tr in dataExcel.info">
                     <td v-for="td in dataExcel.orderby">
-                        <my-input :meta="dataExcel.ctlMeta[td]" v-model="tr[td]" :value="tr[td]" ></my-input>
+                        <my-input :meta="dataExcel.ctlExcelMeta[td]" v-model="tr[td]" :value="tr[td]" ></my-input>
                     </td>
                 </tr>
             </table>
@@ -99,7 +102,7 @@
                     <br><br><br><br><br><br><br>
                     <h3> <- 提交绑定数据 </h3>
                 </div>
-            <div class="div3">
+            <div class="div3" style="overflow:scroll;">
                     <!--表单形式-->
                     <h4>通过Vue表单组件生成表单 </h4>
                     <table rules="all" class="tablem tableClass02">
@@ -127,8 +130,7 @@
 
     <div id="help" v-show="helpIsShow" class="layer_div_c" @mousedown="move" style="top: 297px; left: 187px; width:540px; height: 850px; z-index: 10007; display: block;">
         <span id="span_title_1001" class="layer_title" style="cursor: move;">精装修<a @click="helpIsShow=false" style="cursor:pointer">X</a></span>
-        <p>
-            <div id="divText" style="width: 470px;height: 660px; padding: 10px; border: 1px solid #333;display: block;">
+            <div id="divText"  style="overflow:scroll;width: 470px;height: 460px; padding: 10px; border: 1px solid #333;display: block;margin: 24px;">
                 <span id="FrmCommonForm">
                     <table rules="all" class="tablem tableClass02">
                         <tbody>
@@ -141,7 +143,7 @@
                                         <my-input v-if="item != 'list'" v-model="formValue[formControl[item].controlId]" :meta="formControl[item]" ></my-input>
                                         
                                         <span v-else-if="item == 'list'">
-                                            <!--设置备选项-->
+                                            <!--设置备选项 listItem.number -->
                                             备选项数量：<my-input @change="setListItem"  v-model="listItem.number" value="1" :meta="formControl.listNumber"> </my-input>
                                                         
                                             <div v-for="item in listItem.item">
@@ -155,15 +157,13 @@
                         </tbody>
                     </table>
                 </span>
-                <div>
-                    <textarea readonly v-model="ctlJsonFormat" rows="4" cols="80"> </textarea>
-                    <input type="button" class="input_01" value="设置" @click="copyJson()">
-                </div>
+             
             </div>
-           
-            
-        </p>
-       
+            <div>
+                <textarea readonly v-model="ctlJsonFormat" rows="8" cols="80"> </textarea>
+                <input type="button" class="input_01" value="设置" @click="copyJson()">
+            </div>
+        
     </div>
 
 
@@ -173,25 +173,25 @@
             data:{
                 isSet:false, //避免嵌套循环渲染。 
                 dataExcel:{
-                    orderby:["enName","cnName","type","size","defultValue","isNull","command","ctlType"],
-                    info:[
+                    orderby:["enName","cnName","type","size","defaultValue","isNull","command","ctlType"],
+                    info:[  //数据库文档的json形式
                         {
                             enName:"name",
                             cnName:"姓名",
                             type:"nvarchar",
                             size:50,
-                            defultValue:"",
+                            defaultValue:"",
                             isNull:false,
                             command:"员工姓名",
                             ctlType:101
                         }
                     ],
-                    ctlMeta:{
+                    ctlExcelMeta:{ 
                         enName:{},
                         cnName:{},
                         type:{},
                         size:{},
-                        defultValue:{},
+                        defaultValue:{},
                         isNull:{},
                         command:{},
                         ctlType:{}
@@ -199,41 +199,41 @@
                 },
                 formControl:{
                     orderby:[],
-                    ctlMeta:{
-                        name:{
-                            controlId:101,
-                            controlType:116,
-                            colName:"字段名称",
-                            tabIndex:1,
-                            class:"cssTxt input_t1",
-                            title:"字段的名称",
-                            name:"enName",
-                            value:"",
-                            placeholder:"请输入字段名称",
-                            size:10,
-                            maxlength:10
-                        }
+                    ctlMeta:{//绑定列表的控件
+                        //name:{
+                            //controlId:101,
+                            //controlType:116,
+                            //colName:"字段名称",
+                            //tabIndex:1,
+                            //class:"cssTxt input_t1",
+                            //title:"字段的名称",
+                            //name:"enName",
+                            //value:"",
+                            //placeholder:"请输入字段名称",
+                            //size:10,
+                            //maxlength:10
+                        //}
                     },
-                    value:{}
+                    value:{}  //表单的值
                 }
 
             },
             created: function () {
                 docExcelControlMeta.ctlType.list = controlMeta // 控件类型的选项
-                this.dataExcel.ctlMeta = docExcelControlMeta;  //控件描述
+                this.dataExcel.ctlExcelMeta = docExcelControlMeta;  //控件描述
                 this.dataExcel.info = dataDocInfo;//数据库文档
                 
 
             },
             computed:{
-                docJsonFormat:function(){
+                docJsonFormat:function(){ //json格式的数据库文档
                     return format(JSON.stringify(this.dataExcel.info));
                 },
-                valueJsonFormat:function(){
+                valueJsonFormat:function(){ //表单提交的数据
                     return format(JSON.stringify(this.formControl.value));
                 },
                 valueJsonToParamSQL(){
-                    //提交的数据变成sql
+                    //提交的数据变成参数化sql
                     var re = "";
                     var docJson = this.dataExcel.info;
                     var cols = [];
@@ -244,7 +244,7 @@
                         values.push("?");
                     }
                     //如果是自增主键，设置为 0 
-                    values[0] = "0";
+                    //values[0] = "0";
 
                     re = "INSERT INTO tableName (" + cols.join(',') + ") VALUES (" + values.join(",") + ")";
                     return re;
@@ -265,7 +265,7 @@
                     re = "insert into table (" + cols.join(',') + ") values (" + values.join(",") + ")";
                     return re;
                 },
-                ctlJsonFormat:function(){
+                ctlJsonFormat:function(){ //把json格式的文档，变成表单组件的json
                     //表单控件的json
                     var formJson = {};
                     //表单值的json
@@ -274,7 +274,7 @@
                     var docJson = this.dataExcel.info;
                 
                     //变量socJson
-                    if (!this.isSet){
+                    //if (!this.isSet){ //第一次执行，以后不执行了，避免覆盖精装修
                         for(var key in docJson){
                             //文档里一个字段的描述
                             var doc = docJson[key];
@@ -285,10 +285,16 @@
                                 ctl = {};
                                 ctl.controlType = doc.ctlType;
                                 ctl.class = "cssTxt input_t1";
-                                ctl.placeholder = doc.cnName;
-                                ctl.size = doc.size;
-                                ctl.maxlength = doc.size;
-                                ctl.value = doc.defultValue;
+                                ctl.placeholder ="请输入" + doc.cnName;
+                                if (doc.ctlType === "int"){
+                                    ctl.size = 10;
+                                    ctl.maxlength = 10;
+                                }
+                                else{
+                                    ctl.size = doc.size;
+                                    ctl.maxlength = doc.size;
+                                }
+                                ctl.value = doc.defaultValue;
                             }
 
                             //修改文档可以影响的表单元素的json
@@ -302,7 +308,7 @@
                         }
                         this.formControl.ctlMeta = formJson;
                         this.formControl.value = formValue;
-                    }
+                    //}
                     
 
                     return format(JSON.stringify(this.formControl.ctlMeta));
@@ -349,7 +355,7 @@
                     number:1,
                     item:[{id:1,name:''}]
                 },
-                helpIsShow:true,
+                helpIsShow:false,
                 positionX:0,
                 positionY:0,
 
@@ -362,7 +368,7 @@
             computed:{
                 ctlJsonFormat:function(){
                     // doc.formControl[this.formValue.name] = this.formValue;
-                    doc.isSet = true;
+                    doc.isSet = false;
                     //if (this.formValue.name != "")
                     //    Vue.set(doc.formControl.ctlMeta,this.formValue.name,this.formValue);
                     if (this.formValue.name != ""){
@@ -383,10 +389,12 @@
                     for(var i=0;i<parseInt(val);i++){
                         this.listItem.item.push({
                             id:i+1,
-                            name:''
+                            name:'33'
                         })
                     }
 
+                    this.formValue.list = this.listItem.item;
+ 
                 },
                 //依据控件类型创建备选项的绑定值
                 creatList:function(value){
@@ -399,6 +407,11 @@
                 } 
                  
             },
+            watch: {
+                listItem() {
+                    this.formValue.list = this.listItem.item;
+                }
+            },
             methods: {
                 //设置备选项
                 setListItem:function(returnValue,event, meta){
@@ -410,9 +423,10 @@
                     for(var i=0;i<parseInt(val);i++){
                         this.listItem.item.push({
                             id:i+1,
-                            name:''
+                            name:' '
                         })
                     }
+                    this.formValue.list = this.listItem.item;
 
                 },
                 copyJson:function(){

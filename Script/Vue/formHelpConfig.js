@@ -331,7 +331,10 @@ var controlMeta = {
             'pattern',
             'name',
             'value',
-                      
+            
+            'size',
+            'maxlength',
+            
             'min',
             'max',
             'step'
@@ -461,7 +464,7 @@ var controlMeta = {
             'controlId',
             'controlType',
             'colName',
-            //'isClear',
+            'isClear',
             'tabIndex',
             'class',
             'title',
@@ -476,7 +479,10 @@ var controlMeta = {
           
             'size',
             'maxlength',
-            'multiple'
+            'placeholder',
+            
+            'listKey',
+            'list'
             
             
         ],
@@ -1082,8 +1088,7 @@ var formControl={
                 name:'checkbox',
                 check:false
             }
-            
-    ]
+        ]
         
     },
     disabled:{
