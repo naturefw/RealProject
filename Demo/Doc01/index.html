@@ -283,7 +283,7 @@
                             var ctl = this.formControl.ctlMeta[doc.enName];
                             if (typeof(ctl) === "undefined") {
                                 ctl = {};
-                                ctl.controlType = doc.ctlType;
+                                
                                 ctl.class = "cssTxt input_t1";
                                 ctl.placeholder ="请输入" + doc.cnName;
                                 if (doc.ctlType === "int"){
@@ -301,6 +301,7 @@
                             ctl.colName = doc.cnName;
                             ctl.title = doc.cnName;
                             ctl.name = doc.enName;
+                            ctl.controlType = doc.ctlType;
                             
                             formJson[doc.enName] = ctl;  //表单组件
                             formValue[doc.enName] = ctl.value; //表单值
