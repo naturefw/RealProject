@@ -20,12 +20,10 @@
 ![文档驱动](https://raw.githubusercontent.com/naturefw/RealProject/master/Demo/Doc01/image/datadoc.png)
 
 ## 在线演示
-![在线演示地址](https://naturefw.github.io/RealProject/Demo/Doc01/index.html)
 <https://naturefw.github.io/RealProject/Demo/Doc01/index.html>  
 ![在线演示](https://raw.githubusercontent.com/naturefw/RealProject/master/Demo/Doc01/image/datadoc00online.png)
 
 ## 源码地址
-![https://github.com/naturefw/RealProject/tree/master/Demo/Doc01](https://github.com/naturefw/RealProject/tree/master/Demo/Doc01)
 <https://github.com/naturefw/RealProject/tree/master/Demo/Doc01>
 
 ## 实现步骤
@@ -154,8 +152,6 @@ var dataDocInfo = [
 精装修，设置详细属性
 ![表单展示](https://raw.githubusercontent.com/naturefw/RealProject/master/Demo/Doc01/image/datadoc04form.png)
 
-### 生成表单数据
-
 
 ### 后端
 　　依据json和客户端提交的数据，可以进行验证，通过验证后可以生成增删改查的SQL语句，然后提交给数据库。这样后端的基本功能就可以实现出来了。  
@@ -164,13 +160,10 @@ var dataDocInfo = [
 ### FAQ
 
 1. 数据验证怎么办？
->数据验证分为前端验证和后端验证，前端验证注重与用户的交互，重点在于方便用户录入正确的数据。后端关注的是安全性，分为两大部分，一个是数据类型和范围是否匹配，一个是是否符合业务逻辑的要求。 
-
->如果后端采用node的话，那么前后端的验证基本可以使用同一套代码来实现，如果后端不是node，那么也可以围绕正则来实现判断。  
-
->前端的数据类型可以由组件来实现，比如日期组件，给出的数据都是日期格式，我们来验证一下业务逻辑即可。  
-
->后端就要更严格，必须对前端提交的数据进行严格的验证，这个可以根据文档里的字段类型来判断。业务逻辑可以依赖正则来判断。
+>数据验证分为前端验证和后端验证，前端验证注重与用户的交互，重点在于方便用户录入正确的数据。后端关注的是安全性，分为两大部分，一个是数据类型和范围是否匹配，一个是是否符合业务逻辑的要求。  
+如果后端采用node的话，那么前后端的验证基本可以使用同一套代码来实现，如果后端不是node，那么也可以围绕正则来实现判断。  
+前端的数据类型可以由组件来实现，比如日期组件，给出的数据都是日期格式，我们来验证一下业务逻辑即可。  
+后端就要更严格，必须对前端提交的数据进行严格的验证，这个可以根据文档里的字段类型来判断。业务逻辑可以依赖正则来判断。
 
 2. 不能重复的判断
 >这个就需要后端提供一个接口，先向后端询问是否重复，然后在给用户一个友好的提示。
