@@ -1,0 +1,933 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nature.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Nature.Attributes.ColumnIDAttribute">
+            <summary>
+            定义一个Attribute，记录元数据里字段的ID，用于属性和字段的对应关系。
+            </summary>
+        </member>
+        <member name="P:Nature.Attributes.ColumnIDAttribute.ColumnID">
+            <summary>
+            字段ID，即字段编号
+            </summary>
+        </member>
+        <member name="M:Nature.Attributes.ColumnIDAttribute.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="value">字段编号。int类型</param>
+        </member>
+        <member name="T:Nature.Common.DesBase64">
+            <summary>
+            加密字符串。DES+base64 。
+            </summary>
+        </member>
+        <member name="M:Nature.Common.DesBase64.Encrypt(System.String,System.String)">
+            <summary>
+            设置密钥，加密。
+            </summary>
+            <param name="sourceData">原文</param>
+            <param name="key">密钥，8位数字，字符串方式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.DesBase64.Decrypt(System.String,System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="ciphertext">密文</param>
+            <param name="key">密钥，8位数字，字符串方式</param>
+            <returns></returns>
+        </member>
+        <member name="T:Nature.Common.Functions">
+            <summary>
+            常用函数。
+            </summary>
+        </member>
+        <member name="F:Nature.Common.Functions._index">
+            <summary>
+            PageRegisterAlert 函数里使用的。区分不同的输出
+            </summary>
+        </member>
+        <member name="M:Nature.Common.Functions.StringCut(System.String,System.Int32)">
+            <summary>
+            截取字符串。保证中英文混合的字符串，在截取后字符串的占位长度一致。
+            </summary>
+            <param name="value">要截取的字符串</param>
+            <param name="length">保留的字节数，一个汉字按照两个字节计算</param>
+            <returns>截取后的字符串</returns>
+        </member>
+        <member name="M:Nature.Common.Functions.StripHtml(System.String)">
+            <summary>
+            过滤HTML标签。
+            </summary>
+            <param name="strHtml">要过滤的HTML字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.ToDBC(System.String)">
+             <summary> 转半角的函数(DBC case) </summary>
+             <param name="value">要转换成半角的字符串</param>
+             <returns>半角字符串</returns>
+            <remarks>
+            全角空格为12288，半角空格为32
+            其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+            </remarks>
+        </member>
+        <member name="M:Nature.Common.Functions.ToSBC(System.String)">
+             <summary>
+             转全角的函数(SBC case)
+             </summary>
+             <param name="value">要转成全角的字符串</param>
+             <returns>全角字符串</returns>
+            <remarks>
+            全角空格为12288，半角空格为32
+            其他字符半角(33-126)与全角(65281-65374)的对应关系是：均相差65248
+            </remarks>
+        </member>
+        <member name="M:Nature.Common.Functions.ToMD5(System.String)">
+            <summary>
+            传入明文，返回用MD5处理后的字符串
+            </summary>
+            <param name="value">要处理的字符串</param>
+            <returns>用MD5处理后的字符串</returns>
+        </member>
+        <member name="M:Nature.Common.Functions.FillZero(System.String,System.Int32)">
+            <summary>
+            字符串前面补充0，用来占位
+            </summary>
+            <param name="str">要处理的字符串</param>
+            <param name="length">补充后的长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.TimeSpantoFloat(System.TimeSpan)">
+            <summary>
+            TimeSpan转换成带小数的毫秒
+            </summary>
+            <param name="ts">The ts.</param>
+            <returns></returns>
+            user:jyk
+            time:2012/10/10 19:04
+        </member>
+        <member name="M:Nature.Common.Functions.RndInt(System.Int32,System.Int32)">
+            <summary>
+            生成随机数
+            </summary>
+            <param name="num1">开始</param>
+            <param name="num2">结束</param>
+            <returns>从多少到多少之间的数据，包括开始不包括结束</returns>
+            user:jyk
+            time:2013/2/26 10:55
+        </member>
+        <member name="M:Nature.Common.Functions.RndNumNotRepeat(System.Int32)">
+            <summary>
+            生成数内部不重复的随机数 0-9
+            </summary>
+            <param name="length">位数。范围：2-10</param>
+            <returns></returns>
+            user:jyk
+            time:2013/2/26 10:55
+        </member>
+        <member name="M:Nature.Common.Functions.CloseWindow">
+            <summary>
+            关闭当前窗口(静态)
+            </summary>
+        </member>
+        <member name="M:Nature.Common.Functions.MsgBox(System.String,System.Boolean)">
+            <summary>
+            输出提示信息，然后根据参数是否停止运行。
+            在服务器控件里做属性的值的验证的时候用。
+            </summary>
+            <param name="msg">提示信息</param>
+            <param name="isEnd">true:结束运行；false:继续运行</param>
+        </member>
+        <member name="M:Nature.Common.Functions.OpenWindow(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            (Descript) 打开没有Toolbar的新窗口
+              (Author) 谈伟
+                (Date) 2005-1-18
+            </summary>
+            <param name="url">页面路径</param>
+            <param name="height">窗口高度</param>
+            <param name="width">窗口宽度</param>
+            <param name="webName">窗口名称</param>
+        </member>
+        <member name="M:Nature.Common.Functions.PageRegisterAlert(System.Web.UI.Page,System.String)">
+            <summary>
+            页面显示后，弹出Alert窗口
+            </summary>
+            <param name="page">调用页面(一般为this.Page)</param>
+            <param name="msg">弹出消息</param>
+        </member>
+        <member name="M:Nature.Common.Functions.PageRegisterJavascript(System.Web.UI.Page,System.String)">
+            <summary>
+            页面结尾处，输出一段js脚本
+            </summary>
+            <param name="page">调用页面(一般为this.Page)</param>
+            <param name="js">要输出的js脚本</param>
+        </member>
+        <member name="M:Nature.Common.Functions.PageRegisterString(System.Web.UI.Page,System.String)">
+            <summary>
+            页面结尾处，输出一段信息
+            </summary>
+            <param name="page"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Nature.Common.Functions.IsInt(System.String)">
+            <summary>
+            判断是否是Int类型的数。是返回true 否返回false。可以传入null。
+            </summary>
+            <param name="value">要判断的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.IsNumeric(System.String)">
+            <summary>
+            判断是否是Numeric类型的数，是返回true 否返回false。可以传入null。
+            </summary>
+            <param name="value">要验证的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.StringToInt(System.String)">
+            <summary>
+            转换为整数。不是整数的话，返回null
+            </summary>
+            <param name="value">要转换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.StringToFloat(System.String)">
+            <summary>
+            转换为Float类型的数。不是的话，返回null
+            </summary>
+            <param name="value">要转换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.IsIDString(System.String)">
+            <summary>
+            判断是否为ID串（1,2,3,4）。是返回true 否返回false。可以传入null。
+            ID为int类型
+            </summary>
+            <example >
+            1,2,3,4,5,6,7
+            </example>
+            <param name="value">要判断的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.IsGuid(System.String)">
+            <summary>
+            验证是否是GUID
+            6454bc76-5f98-de11-aa4c-00219bf56456
+            </summary>
+            <param name="value">要验证的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.IsDateTime(System.String)">
+            <summary>
+            判断是否是正确的时间格式。正确返回 true，不正确返回false。
+            </summary>
+            <param name="value">要判断的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.StringToDateTime(System.String)">
+            <summary>
+            转换时间。不正确的话，返回null
+            </summary>
+            <param name="value">要转换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.DeleteFile(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="path">文件的物理地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Functions.GetHtmlByUrl(System.String)">
+            <summary>
+            传入URL返回网页的html代码
+            </summary>
+            <param name="url">要获取HTML的网址</param>
+            <returns></returns>
+        </member>
+        <member name="T:Nature.Common.Json">
+            <summary>
+            把数据变成json的value的形式。也可以变成key的形式
+            </summary>
+        </member>
+        <member name="M:Nature.Common.Json.StringToJson(System.String,System.Text.StringBuilder)">
+            <summary>
+            字符串类型的数据转换为 json格式
+            </summary>
+            <param name="value">要转换的字符串</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Json.IntToJson(System.Int32,System.Text.StringBuilder)">
+            <summary>
+            int 类型的数据转换为 json格式
+            </summary>
+            <param name="value">要转换的int</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Json.DoubleToJson(System.Double,System.Text.StringBuilder)">
+            <summary>
+            Double 类型的数据转换为 json格式
+            </summary>
+            <param name="value">要转换的double</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Json.DecimalToJson(System.Decimal,System.Text.StringBuilder)">
+            <summary>
+            Double 类型的数据转换为 json格式
+            </summary>
+            <param name="value">要转换的double</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Json.BoolToJson(System.Boolean,System.Text.StringBuilder)">
+            <summary>
+            Bool 类型的数据转换为 json格式
+            </summary>
+            <param name="value">要转换的bool</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.Json.DateTimeToJson(System.DateTime,System.Text.StringBuilder)">
+            <summary>
+            DateTime 类型的数据转换为 json格式
+            </summary>
+            <param name="value">要转换的日期</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+        </member>
+        <member name="M:Nature.Common.Json.ArrayToJson(System.Object[],System.Text.StringBuilder)">
+            <summary>
+            数组 类型的数据转换为 json格式
+            </summary>
+            <param name="array">要转换的数组</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+        </member>
+        <member name="M:Nature.Common.Json.ByteToJson(System.Byte,System.Text.StringBuilder)">
+            <summary>
+            byte 类型的数据转换为 json格式
+            </summary>
+            <param name="b">要转换的byte</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+        </member>
+        <member name="M:Nature.Common.Json.ObjectToJson(System.Object,System.Text.StringBuilder)">
+            <summary>
+            Object 类型的数据转换为 json格式
+            </summary>
+            <param name="o">要转换的Object</param>
+            <param name="sb">StringBuilder的实例，即json的容器</param>
+        </member>
+        <member name="M:Nature.Common.Json.JsonToDictionary1(System.String)">
+            <summary>
+            把控件的描述信息转换成字典 Dictionary  
+            string：属性名称
+            string：值
+            </summary>
+            <param name="json">json格式的控件扩展信息</param>
+            <returns></returns>
+            user:jyk
+            time:2012/8/29 20:28
+        </member>
+        <member name="M:Nature.Common.Json.JsonToDictionary(System.String)">
+            <summary>
+            把控件的描述信息转换成字典 Dictionary  
+            string：属性名称
+            string：值
+            </summary>
+            <param name="json">json格式的控件扩展信息</param>
+            <returns></returns>
+            user:jyk
+            time:2012/8/29 20:28
+        </member>
+        <member name="T:Nature.Common.URLParamVerification">
+            <summary>
+            URL参数的处理，接收、验证和拼接
+            </summary>
+            user:jyk
+            time:2013/2/6 15:40
+        </member>
+        <member name="M:Nature.Common.URLParamVerification.DataID(System.Web.HttpContext)">
+            <summary>
+            验证记录ID。没传，或者ID不正确，设置为 string.Empty
+            可能不传ID的页面使用
+            </summary>
+            <param name="context">上下文</param>
+            <returns></returns>
+            user:jyk
+            time:2012/11/13 10:00
+        </member>
+        <member name="M:Nature.Common.URLParamVerification.FormDataID(System.Web.HttpContext,System.String)">
+            <summary>
+            设置外键。通过URL参数 fpvid 获取。
+            </summary>
+            <param name="context"></param>
+            <param name="paraName">url参数名称 </param>
+            <returns></returns>
+            user:jyk
+            time:2012/11/13 10:00
+        </member>
+        <member name="M:Nature.Common.URLParamVerification.ModuleID(System.Web.HttpContext)">
+            <summary>
+            设置ModuleID。通过URL参数 mid 获取。
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+            user:jyk
+            time:2012/11/13 10:00
+        </member>
+        <member name="M:Nature.Common.URLParamVerification.PageViewID(System.Web.HttpContext,System.String)">
+            <summary>
+            设置页面视图ID。通过URL参数 mpvid 获取。
+            </summary>
+            <param name="context"></param>
+            <param name="paraName"> </param>
+            <returns></returns>
+            user:jyk
+            time:2012/11/13 10:00
+        </member>
+        <member name="M:Nature.Common.URLParamVerification.StringID(System.Web.HttpContext,System.String)">
+            <summary>
+            设置页面视图ID。通过URL参数 mpvid 获取。
+            </summary>
+            <param name="context"></param>
+            <param name="paraName"> </param>
+            <returns></returns>
+            user:jyk
+            time:2012/11/13 10:00
+        </member>
+        <member name="T:Nature.Common.SaveViewStateLocation">
+            <summary>
+            保存数据的位置
+            </summary>
+        </member>
+        <member name="F:Nature.Common.SaveViewStateLocation.NoSave">
+            <summary>
+            不保存
+            </summary>
+        </member>
+        <member name="F:Nature.Common.SaveViewStateLocation.Cookie">
+            <summary>
+            放在Cookie里面保存
+            </summary>
+        </member>
+        <member name="F:Nature.Common.SaveViewStateLocation.Hidden">
+            <summary>
+            放在隐藏域里面保存
+            </summary>
+        </member>
+        <member name="F:Nature.Common.SaveViewStateLocation.Session">
+            <summary>
+            放在Session里面保存
+            </summary>
+        </member>
+        <member name="F:Nature.Common.SaveViewStateLocation.Cache">
+            <summary>
+            放在Cache里面保存
+            </summary>
+        </member>
+        <member name="F:Nature.Common.SaveViewStateLocation.Application">
+            <summary>
+            放在Application里面保存
+            </summary>
+        </member>
+        <member name="T:Nature.Common.MyViewState">
+            <summary>
+            缓存属性值
+            </summary>
+        </member>
+        <member name="F:Nature.Common.MyViewState.vs">
+            <summary>
+            保存数据的字典
+            </summary>
+        </member>
+        <member name="M:Nature.Common.MyViewState.#ctor">
+            <summary>
+            构造函数，设置默认存放位置：不保存。
+            </summary>
+        </member>
+        <member name="P:Nature.Common.MyViewState.SaveLocation">
+            <summary>
+            存放数据的位置。
+            </summary>
+        </member>
+        <member name="F:Nature.Common.MyViewState._key">
+            <summary>
+            密钥
+            </summary>
+        </member>
+        <member name="P:Nature.Common.MyViewState.Key">
+            <summary>
+            密钥，不同的密钥会生成不同的密文。空字符串表示不需要加密。
+            </summary>
+        </member>
+        <member name="P:Nature.Common.MyViewState.ClientID">
+            <summary>
+            保存数据的标识
+            </summary>
+        </member>
+        <member name="P:Nature.Common.MyViewState.Item(System.String)">
+            <summary>
+            索引器，类似于ViewState的使用方式
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.MyViewState.SaveViewState">
+            <summary>
+            把数据保存到指定的位置里面。
+            </summary>
+        </member>
+        <member name="M:Nature.Common.MyViewState.LoadViewState">
+            <summary>
+            从保存的位置加载数据。
+            </summary>
+        </member>
+        <member name="F:Nature.Common.MyViewState._page">
+            <summary>
+            用于给表单里面添加隐藏域和加事件
+            </summary>
+        </member>
+        <member name="P:Nature.Common.MyViewState.Page">
+            <summary>
+            传递Page实例，以实现自动保存数据，和添加隐藏域的功能
+            </summary>
+        </member>
+        <member name="T:Nature.Common.DesUrl">
+            <summary>
+            加密字符串。DES 。
+            </summary>
+        </member>
+        <member name="M:Nature.Common.DesUrl.Encrypt(System.String,System.String)">
+            <summary>
+            设置密钥，加密。
+            </summary>
+            <param name="sourceData">原文</param>
+            <param name="key">密钥，8位，字符串方式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Common.DesUrl.Decrypt(System.String,System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="ciphertext">密文</param>
+            <param name="key">密钥，8位，字符串方式</param>
+            <returns></returns>
+        </member>
+        <member name="T:Nature.Data.Model.WebList1">
+            <summary>
+            简单的列表，ID、名称、连接
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList1.ID">
+            <summary>
+            记录的主键ID。
+            对应字段名（别名）：ID
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList1.URL">
+            <summary>
+            链接地址，用于静态页或者URL重写，也可以是动态页面
+            对应字段名（别名）：URL
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList1.Title">
+            <summary>
+            标题、名称等
+            对应字段名（别名）：Title
+            </summary>
+        </member>
+        <member name="T:Nature.Data.Model.WebList2">
+            <summary>
+            一般的列表，ID、名称、连接之外，还有图片名、简介、发表时间等字段，还可以“嵌套”
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.ID">
+            <summary>
+            记录的主键ID
+            对应字段名（别名）：ID
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.URL">
+            <summary>
+            链接地址，用于静态页或者URL重写
+            对应字段名（别名）：URL
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.Title">
+            <summary>
+            未设置截取长度的时候，完整的标题，设置截取长度后，显示截取后的标题
+            对应字段名（别名）：Title
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.FullTitle">
+            <summary>
+            永远显示完整标题
+            对应字段名（别名）：Title
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.AddedDate">
+            <summary>
+            日期时间字段
+            对应字段名（别名）：AddedDate
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.Introduction">
+            <summary>
+            简介内容
+            对应字段名（别名）：Intro
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.Hits">
+            <summary>
+            人气，int的字段
+            对应字段名（别名）：hits
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.Img">
+            <summary>
+            图片名称
+            对应字段名（别名）：img
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.Kind">
+            <summary>
+            分类，分类ID
+            对应字段名（别名）：kind
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.Spare">
+            <summary>
+            备用
+            对应字段名（别名）：spare
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2.Other">
+            <summary>
+            其他信息
+            </summary>
+        </member>
+        <member name="T:Nature.Data.Model.WebList2Format">
+            <summary>
+            WebList2的格式化，标题、简介的最大字符数，发表时间的格式化。
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2Format.TitleMaxCount">
+            <summary>
+            标题(Title)的最大字符数，一个汉字按两个字节计算。
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2Format.DateFormat">
+            <summary>
+            发表时间（AddedDate）的格式化。空表示不格式化。
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2Format.IntroMaxCount">
+            <summary>
+            简介(Introduction)的最大字符数，一个汉字按两个字节计算。
+            </summary>
+        </member>
+        <member name="P:Nature.Data.Model.WebList2Format.Other">
+            <summary>
+            WebList2里面Other对应的格式化信息
+            </summary>
+        </member>
+        <member name="M:Nature.Data.Model.WebList2Format.#ctor">
+            <summary>
+            初始化，设置默认值
+            </summary>
+        </member>
+        <member name="T:Nature.Data.Func`1">
+            <summary>
+            怪怪提供的一种方式，目前我还说不清楚。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Nature.Data.IDal">
+            <summary>
+            为分页控件设计的接口，以达到可以更换数据访问函数库的目的
+            </summary>
+        </member>
+        <member name="M:Nature.Data.IDal.ExecuteFillDataTable(System.String)">
+            <summary>
+            传入SQL语句，返回DataTable的接口
+            </summary>
+            <param name="sql">SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Data.IDal.ExecuteFillDataSet(System.String)">
+            <summary>
+            传入SQL语句，返回DataSet的接口
+            </summary>
+            <param name="sql">SQL语句</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Data.IDal.ExecuteFillWebList2(System.String,Nature.Data.Model.WebList2Format)">
+            <summary>
+            传入SQl语句，返回实体类WebList2的IList集合
+            </summary>
+            <param name="sql">查询语句。
+            比如：select as ID ,as title,as URL ,as AddedDate, as Intro ,as hits ,as img , as spare from tableName 
+            </param>
+            <param name="lstFormat">标题的最大字符数、内容简介的最大字符数，一个汉字按照两个字符计算。传入“0”则表示不截取标题。发表时间的格式化。</param>
+            <returns>返回WebList2结构的集合。ID，URL，标题，时间，人气，图片名，简介，备用</returns>
+        </member>
+        <member name="M:Nature.Data.IDal.ExecuteString(System.String)">
+            <summary>
+            传入SQL语句，返回第一条记录，第一个字段的值的接口。
+            可以用于统计总记录数
+            </summary>
+            <param name="sql">查询语句。
+            比如：select title   from tableName where ID =1
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.Data.IDal.ExecuteStringsByColumns(System.String)">
+            <summary>
+            运行SQl语句返回每一条记录的第一个字段的值。返回字符串数组
+            </summary>
+            <param name="sql">查询语句。比如select myName from tableName</param>
+            <returns></returns>
+        </member>
+        <member name="P:Nature.Data.IDal.ErrorMessage">
+            <summary>
+            记录出错的描述信息
+            </summary>
+        </member>
+        <member name="T:Nature.DebugWatch.NatureDebug">
+            <summary>
+            记录详细步骤和每个步骤的详细用时的实体类
+            </summary>
+        </member>
+        <member name="F:Nature.DebugWatch.NatureDebug._stopwatch">
+            <summary>
+            计时器
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebug.Title">
+            <summary>
+            步骤名称，比如验证用户是否登录、获取记录。
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebug.UserId">
+            <summary>
+            访问人的ID
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebug.StartTime">
+            <summary>
+            开始时间 
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebug.UseTime">
+            <summary>
+            步骤执行完毕，使用的时间，单位：毫秒
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebug.Url">
+            <summary>
+            请求的Url地址，包括参数
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebug.ErrorMessage">
+            <summary>
+            如果出错的话，给客户的友好提示信息，并且程序不能继续运行。
+            比如添加数据的时候，某数据的格式不正确，告诉客户相关信息。
+            string.Empty  表示没有问题。
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebug.DetailList">
+            <summary>
+            步骤内部的多个子步骤
+            </summary>
+        </member>
+        <member name="M:Nature.DebugWatch.NatureDebug.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:Nature.DebugWatch.NatureDebug.Stop">
+            <summary>
+            停止计时，并且计算执行时间
+            </summary>
+        </member>
+        <member name="T:Nature.DebugWatch.NatureDebugInfo">
+            <summary>
+            记录详细步骤和每个步骤的详细用时的实体类
+            </summary>
+        </member>
+        <member name="F:Nature.DebugWatch.NatureDebugInfo._stopwatch">
+            <summary>
+            计时器
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebugInfo.Title">
+            <summary>
+            步骤名称，比如验证用户是否登录、获取记录。
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebugInfo.UseTime">
+            <summary>
+            步骤执行完毕，使用的时间，单位：毫秒
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebugInfo.Remark">
+            <summary>
+            备注信息
+            </summary>
+        </member>
+        <member name="P:Nature.DebugWatch.NatureDebugInfo.DetailList">
+            <summary>
+            步骤内部的多个子步骤
+            </summary>
+        </member>
+        <member name="M:Nature.DebugWatch.NatureDebugInfo.#ctor">
+            <summary>
+            初始化
+            </summary>
+        </member>
+        <member name="M:Nature.DebugWatch.NatureDebugInfo.Stop">
+            <summary>
+            停止计时，并且计算执行时间
+            </summary>
+        </member>
+        <member name="T:Nature.MetaData.Entity.IColumn">
+            <summary>
+            给字段的元数据实体类定义一个接口。
+            目前的目的是为了方便引用，否则会出现互相引用。
+            便于IControlHelp的定义。
+            </summary>
+        </member>
+        <member name="P:Nature.MetaData.Entity.IColumn.Key">
+            <summary>
+            加入到集合里使用的key
+            </summary>
+            <value>
+            The key.
+            </value>
+            user:jyk
+            time:2012/9/15 10:24
+        </member>
+        <member name="T:Nature.SsoConfig.SsoInfo">
+            <summary>
+            网站应用端的配置信息类
+            </summary>
+            user:jyk
+            time:2013/1/30 8:50
+        </member>
+        <member name="P:Nature.SsoConfig.SsoInfo.WebAppID">
+            <summary>
+            返回统一配置的网站应用ID
+            </summary>
+            user:jyk
+            time:2013/1/30 8:52
+        </member>
+        <member name="P:Nature.SsoConfig.SsoInfo.SSOUrl">
+            <summary>
+            sso验证的网址，不带斜杠
+            </summary>
+            user:jyk
+            time:2013/1/30 8:52
+        </member>
+        <member name="P:Nature.SsoConfig.SsoInfo.ResourceURL">
+            <summary>
+            元数据服务的网址
+            </summary>
+            user:jyk
+            time:2013/1/30 8:52
+        </member>
+        <member name="P:Nature.SsoConfig.SsoInfo.DataServiceUrl">
+            <summary>
+            数据增删改查服务的网址
+            </summary>
+            user:jyk
+            time:2013/1/30 8:52
+        </member>
+        <member name="P:Nature.SsoConfig.SsoInfo.AppKey">
+            <summary>
+            解密网站应用的票据的密钥
+            </summary>
+            user:jyk
+            time:2013/1/30 8:52
+        </member>
+        <member name="P:Nature.SsoConfig.SsoInfo.IsWriteAjaxDebug">
+            <summary>
+            ajax登录时，客户端是否显示操作日志。True 显示；False不显示
+            </summary>
+            user:jyk
+            time:2013/1/30 8:52
+        </member>
+        <member name="P:Nature.SsoConfig.SsoInfo.IsWriteSsoLog">
+            <summary>
+            服务器端是否写操作日志。True 写；False不写
+            </summary>
+            user:jyk
+            time:2013/1/30 8:52
+        </member>
+        <member name="T:Nature.UI.IControlHelp">
+            <summary>
+            控件的取值、赋值、自我描绘的接口
+            </summary>
+        </member>
+        <member name="P:Nature.UI.IControlHelp.ControlValue">
+            <summary>
+            统一控件的取值和赋值的属性
+            </summary>
+            <returns>控件的某个值</returns>
+        </member>
+        <member name="M:Nature.UI.IControlHelp.GetControlValue(System.String)">
+            <summary>
+            根据kind获取控件的某个属性的值
+            </summary>
+            <param name="kind">取值方式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nature.UI.IControlHelp.SetControlValue(System.String,System.String)">
+            <summary>
+            根据kind设置控件的默认值
+            </summary>
+            <param name="kind">赋值方式</param>
+            <param name="value">要设置的值</param>
+        </member>
+        <member name="M:Nature.UI.IControlHelp.SetControlState(System.String)">
+            <summary>
+            设置控件的状态
+            1：正常
+            2：只读
+            3：不可用
+            </summary>
+            <param name="kind">1：正常；2：只读；3：不可用</param>
+        </member>
+        <member name="M:Nature.UI.IControlHelp.ShowMe(Nature.MetaData.Entity.IColumn,Nature.Data.IDal,System.Boolean)">
+            <summary>
+            通过控件的描述信息，进行自我描述。比如设置maxlength 等。
+            </summary>
+            <param name="formColumnMeta">字段信息</param>
+            <param name="dal">数据访问函数库</param>
+            <param name="isForm">True：表单控件；False：查询控件</param>
+        </member>
+        <member name="T:Nature.UI.IFillItemHelp">
+            <summary>
+            填充Item的接口
+            </summary>
+        </member>
+        <member name="M:Nature.UI.IFillItemHelp.ItemAddByString(System.String)">
+            <summary>
+            字符串填充
+            </summary>
+            <param name="valuesAndTexts">选项。~分割。</param>
+        </member>
+        <member name="M:Nature.UI.IFillItemHelp.BindListBySql(System.String,Nature.Data.IDal)">
+            <summary>
+            根据SQL语句提取数据，绑定Item
+            </summary>
+            <param name="sql">提取数据的SQL语句</param>
+            <param name="dal">数据访问函数库的实例</param>
+        </member>
+    </members>
+</doc>
