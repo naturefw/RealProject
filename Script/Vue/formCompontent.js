@@ -4,34 +4,34 @@
     data:function(){
         return {
             type:{
-            100:'textarea',         //多行文本框
-            101:'text',             //单行文本框
-            102:'password',         //密码
-            103:'date',             //日期
-            104:'datetime-local',   //日期时间
-            105:'time',             //时间
-            106:'month',            //年月
-            107:'week',             //年周
-            108:'file',             //上传文件
-            109:'file',             //上传图片
-            110:'color',            //颜色
-            111:'number',           //数字
-            112:'tel',              //电话
-            113:'email',            //电子邮件
-            114:'url',              //url
-            115:'range',            //滑块
-            116:'search',           //搜索
-            117:'text',             //当前登录人
-            118:'text',             //弹窗选择记录
-          
-            130:'fulltext',         //富文本编辑器
-            150:'select',           //下拉列表框 单选
-            151:'selects',          //列表框 多选
-            152:'selectMore',       //联动下拉列表框
-            153:'radios',           //单选组
-            154:'checkboxs',        //多选组
-            155:'checkbox',         //多选
-            156:''
+                100:'textarea',         //多行文本框
+                101:'text',             //单行文本框
+                102:'password',         //密码
+                103:'date',             //日期
+                104:'datetime-local',   //日期时间
+                105:'time',             //时间
+                106:'month',            //年月
+                107:'week',             //年周
+                108:'file',             //上传文件
+                109:'file',             //上传图片
+                110:'color',            //颜色
+                111:'number',           //数字
+                112:'tel',              //电话
+                113:'email',            //电子邮件
+                114:'url',              //url
+                115:'range',            //滑块
+                116:'search',           //搜索
+                117:'text',             //当前登录人
+                118:'text',             //弹窗选择记录
+            
+                130:'fulltext',         //富文本编辑器
+                150:'select',           //下拉列表框 单选
+                151:'selects',          //列表框 多选
+                152:'selectMore',       //联动下拉列表框
+                153:'radios',           //单选组
+                154:'checkboxs',        //多选组
+                155:'checkbox',         //多选
+                156:''
             }
         }
  
